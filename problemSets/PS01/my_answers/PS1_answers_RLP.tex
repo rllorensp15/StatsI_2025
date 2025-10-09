@@ -1,449 +1,182 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-\documentclass[
-]{article}
-\usepackage{xcolor}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\usepackage{iftex}
-\ifPDFTeX
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-\usepackage{lmodern}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
-% Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
 \usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
 \usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx}
-\makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
-% Set default figure placement to htbp
-\def\fps@figure{htbp}
-\makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  pdftitle={PS1},
-  pdfauthor={Rubèn Llorens Poblador},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
 
-\title{PS1}
-\author{Rubèn Llorens Poblador}
-\date{2025-10-08}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Problem Set 1}
+\date{Due: October 9, 2025}
+\author{Applied Stats/Quant Methods 1}
 
 \begin{document}
-\maketitle
+	\maketitle
+	
+	\section*{Instructions}
+	\begin{itemize}
+	\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
+\item Your homework should be submitted electronically on GitHub.
+\item This problem set is due before 23:59 on Thursday October 9, 2025. No late assignments will be accepted.
+	\end{itemize}
+	
+	\vspace{1cm}
+	\section*{Question 1: Education}
 
-A school counselor was curious about the average of IQ of the students
-in her school and took a random sample of 25 students' IQ scores. The
-following is the data set:
+A school counselor was curious about the average of IQ of the students in her school and took a random sample of 25 students' IQ scores. The following is the data set:\\
+\vspace{.5cm}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{105}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{86}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{111}\NormalTok{, }\DecValTok{104}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{108}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{94}\NormalTok{, }\DecValTok{113}\NormalTok{, }\DecValTok{112}\NormalTok{, }\DecValTok{98}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{97}\NormalTok{, }\DecValTok{95}\NormalTok{,}
-       \DecValTok{111}\NormalTok{, }\DecValTok{114}\NormalTok{, }\DecValTok{89}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{126}\NormalTok{, }\DecValTok{98}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\lstinputlisting[language=R, firstline=36, lastline=36]{PS1_answers_RLP.R}  
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Find a 90\% confidence interval for the average student IQ in the
-  school.
-\end{enumerate}
-
-We will start finding the mean of our data set to then be able to
-calculate the S:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mean\_y }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(y)}
-\NormalTok{mean\_y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 98.44
-\end{verbatim}
-
-To find the sum of errors, we need to create a vector with the sum of
-the demeaned values of y
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{demeaned }\OtherTok{\textless{}{-}}\NormalTok{ y }\SpecialCharTok{{-}}\NormalTok{ mean\_y}
-\end{Highlighting}
-\end{Shaded}
-
-And then, the sum of squared errors
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{squaredError }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(demeaned}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
-\NormalTok{squaredError}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 4114.16
-\end{verbatim}
-
-I now calculate the variance and the S
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{variance }\OtherTok{\textless{}{-}}\NormalTok{ squaredError}\SpecialCharTok{/}\NormalTok{(}\FunctionTok{length}\NormalTok{(y)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
-\NormalTok{S }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(variance)}
-\NormalTok{S}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 13.09287
-\end{verbatim}
-
-Now we need to calculate the mean standard error (SE), thus, S/sqrt(n)
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SE }\OtherTok{\textless{}{-}}\NormalTok{ S}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(y))}
-\NormalTok{SE}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2.618575
-\end{verbatim}
-
-Now I'll find the t value, consdiering that the DF = 24 (as length(y) =
-25)
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{tcrit }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\FloatTok{0.95}\NormalTok{, }\AttributeTok{df=}\DecValTok{24}\NormalTok{)}
-\NormalTok{tcrit}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1.710882
-\end{verbatim}
-
-Now I will get the Margin of Error (ME), this is, ``tcrit · SE''
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ME }\OtherTok{\textless{}{-}}\NormalTok{ tcrit}\SpecialCharTok{*}\NormalTok{SE}
-\NormalTok{ME}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 4.480072
-\end{verbatim}
-
-Now I just need to define the interval limits according to mean\_y
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lower }\OtherTok{\textless{}{-}}\NormalTok{ mean\_y }\SpecialCharTok{{-}}\NormalTok{ ME}
-\NormalTok{upper }\OtherTok{\textless{}{-}}\NormalTok{ mean\_y }\SpecialCharTok{+}\NormalTok{ ME}
-\NormalTok{ci\_90\_y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(lower, upper)}
-\NormalTok{ci\_90\_y}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  93.95993 102.92007
-\end{verbatim}
-
-This means that the 90\% confidence interval for the average student IQ
-in the school is {[}93.96, 103.92{]}, meaning that, with 90\% of
-confidence, the real average IQ for this school's students is between
-both values.
+\vspace{1cm}
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Next, the school counselor was curious whether the average student IQ
-  in her school is higher than the average IQ score (100) among all the
-  schools in the country. Using the same sample, conduct the appropriate
-  hypothesis test with alfa = 0.05.
+	\item Find a 90\% confidence interval for the average student IQ in the school.\\
+	
+	\lstinputlisting[language=R, firstline=38, lastline=81]{PS1_answers_RLP.R} 
+	
+	This means that the 90\% confidence interval for the average student IQ in the school is [93.96, 103.92], meaning that, with 90\% of confidence, the real average IQ for this school's students is between both values.
+	
+	\item Next, the school counselor was curious  whether  the average student IQ in her school is higher than the average IQ score (100) among all the schools in the country.\\ 
+	
+	
+	\noindent Using the same sample, conduct the appropriate hypothesis test with $\alpha=0.05$.
 \end{enumerate}
 
-To do this, we have a H0 that mu = 100 and a H1 that mu \textgreater{}
-100. I need to do a T test.
+		\lstinputlisting[language=R, firstline=91, lastline=105]{PS1_answers_RLP.R} 
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{t }\OtherTok{\textless{}{-}}\NormalTok{ (mean\_y }\SpecialCharTok{{-}} \DecValTok{100}\NormalTok{)}\SpecialCharTok{/}\NormalTok{SE}
-\NormalTok{t}
-\end{Highlighting}
-\end{Shaded}
+As t is clearly lower than t, I can't reject the H0. Therefore, I don't have strong evidence to tell the school counselor whether the average student IQ in her school is higher than the average IQ score (100) among all the schools in the country.
 
-\begin{verbatim}
-## [1] -0.5957439
-\end{verbatim}
+\newpage
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{alfa }\OtherTok{\textless{}{-}} \FloatTok{0.05}
-\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(y)}\SpecialCharTok{{-}}\DecValTok{1}
-\NormalTok{tcrit }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alfa, df)}
-\NormalTok{tcrit}
-\end{Highlighting}
-\end{Shaded}
+	\section*{Question 2: Political Economy}
 
-\begin{verbatim}
-## [1] 1.710882
-\end{verbatim}
+\noindent Researchers are curious about what affects the amount of money communities spend on addressing homelessness. The following variables constitute our data set about social welfare expenditures in the USA. \\
+\vspace{.5cm}
 
-Now, I must compare t (observed) and tcrit
+\begin{tabular}{r|l}
+	\texttt{State} &\emph{50 states in US} \\
+	\texttt{Y} & \emph{per capita expenditure on shelters/housing assistance in state}\\
+	\texttt{X1} &\emph{per capita personal income in state} \\
+	\texttt{X2} &  \emph{Number of residents per 100,000 that are "financially insecure" in state}\\
+	\texttt{X3} &  \emph{Number of people per thousand residing in urban areas in state} \\
+	\texttt{Region} &  \emph{1=Northeast, 2= North Central, 3= South, 4=West} \\
+\end{tabular}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{t}
-\end{Highlighting}
-\end{Shaded}
+\vspace{.5cm}
+\noindent Explore the \texttt{expenditure} data set and import data into \texttt{R}.
+\vspace{.5cm}
+\lstinputlisting[language=R, firstline=54, lastline=54]{PS1_answers_RLP.R}  
+\vspace{.5cm}
+\begin{itemize}
 
-\begin{verbatim}
-## [1] -0.5957439
-\end{verbatim}
+\item
+Please plot the relationships among \emph{Y}, \emph{X1}, \emph{X2}, and \emph{X3}? What are the correlations among them (you just need to describe the graph and the relationships among them)?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{tcrit}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{plot1.png}
+\end{figure}
 
-\begin{verbatim}
-## [1] 1.710882
-\end{verbatim}
+\lstinputlisting[language=R, firstline=123, lastline=137]{PS1_answers_RLP.R}  
 
-As t is clearly lower than t, I can't reject the H0. Therefore, I don't
-have strong evidence to tell the school counselor whether the average
-student IQ in her school is higher than the average IQ score (100) among
-all the schools in the country.
 
-I now start the second question. First, I import the data set (in .txt
-format) into R:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.delim}\NormalTok{(}\StringTok{"C:/Users/Usuario/Documents/GitHub/StatsI\_2025/datasets/expenditure.txt"}\NormalTok{,}
-                   \AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
-\FunctionTok{View}\NormalTok{(data)}
-\end{Highlighting}
-\end{Shaded}
+As seen in the graphs, the correlations between all four variables are always positive, also their strength varies.
 
-\#2.1. Please plot the relationships among Y, X1, X2, and X3? What are
-the correlations among them (you just need to describe the graph and the
-relationships among them)?
+Y is moderately correlated with all other three, but especially with X1. X1, however, is more strongly correlated with X3, while really weakly with X2. Finally, X2 and X3 are also weakly correlated.
 
-\#I start selecting the variables I'm interested in:
+\vspace{.5cm}
+\item
+Please plot the relationship between \emph{Y} and \emph{Region}? On average, which region has the highest per capita expenditure on housing assistance?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data\_sel }\OtherTok{\textless{}{-}}\NormalTok{ data[}\FunctionTok{c}\NormalTok{(}\StringTok{"Y"}\NormalTok{,}\StringTok{"X1"}\NormalTok{,}\StringTok{"X2"}\NormalTok{,}\StringTok{"X3"}\NormalTok{)]}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{boxplot2.png}
+\end{figure}
 
-\#And now I can plot the relationship amongst them:
+\lstinputlisting[language=R, firstline=152, lastline=167]{PS1_answers_RLP.R}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(data\_sel)}
-\end{Highlighting}
-\end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{PS1_answers_RLP_files/figure-latex/unnamed-chunk-16-1.pdf}}
 
-\#Now, it's time to calculate the correlations between these variables
-(using the function cor():
+Now, I confirm that my observation of the graph was correct.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{table\_correlation }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(data\_sel)}
-\NormalTok{table\_correlation}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-##            Y        X1        X2        X3
-## Y  1.0000000 0.5317212 0.4482876 0.4636787
-## X1 0.5317212 1.0000000 0.2056101 0.5952504
-## X2 0.4482876 0.2056101 1.0000000 0.2210149
-## X3 0.4636787 0.5952504 0.2210149 1.0000000
-\end{verbatim}
 
-\#Interpretation:
+\vspace{.5cm}
 
-\#As seen in the graphs, the correlations between all four variables are
-always positive, also their strength varies.
 
-\#Y is moderately correlated with all other three, but especially with
-X1. X1, however, is more strongly correlated with X3, while really
-weakly with X2. Finally, X2 and X3 are also weakly correlated.
+\item
 
-\#2.2. Please plot the relationship between Y and Region? On average,
-which region has the highest per capita expenditure on housing
-assistance?
 
-\#I will use the function boxplot(), asking r to use data from my
-dataset ``data'' and to use ``Region'' as the X and Y as the Y.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{boxplot}\NormalTok{(Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Region, }\AttributeTok{data =}\NormalTok{ data,}
-        \AttributeTok{main =} \StringTok{"Per capita expenditure on housing assistance per Region"}\NormalTok{,}
-        \AttributeTok{xlab =} \StringTok{"Region"}\NormalTok{,}
-        \AttributeTok{ylab =} \StringTok{"Per capita expenditure on housing assistance"}\NormalTok{,}
-        \AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{PS1_answers_RLP_files/figure-latex/unnamed-chunk-18-1.pdf}}
+Please plot the relationship between \emph{Y} and \emph{X1}? Describe this graph and the relationship. Reproduce the above graph including one more variable \emph{Region} and display different regions with different types of symbols and colors.
 
-\#According to the graph, region 4 has the highest per capita
-expenditure on housing assistance.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{boxplot3.png}
+\end{figure}
 
-\#But we can also calculate the mean per region:
+\lstinputlisting[language=R, firstline=176, lastline=194]{PS1_answers_RLP.R}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mean\_by\_region }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Y, data}\SpecialCharTok{$}\NormalTok{Region, mean)}
-\NormalTok{mean\_by\_region}
-\end{Highlighting}
-\end{Shaded}
+We can now see that there are important regional differences. The graphic shows, as we have previously seen, that the per capita expenditure on housing assistance is, indeed, highest in Region 4 and lowest in Region 3. Also, Regions 3 and 4 seem to be quite homogeneous in both dimensions (variables X1 and Y).
 
-\begin{verbatim}
-##        1        2        3        4 
-## 79.44444 83.91667 69.18750 88.30769
-\end{verbatim}
+\end{itemize}
 
-\#Now, I confirm that my observation of the graph was correct.
-
-\#2.3. Please plot the relationship between Y and X1? Describe this
-graph and the relationship. Reproduce the above graph including one more
-variable Region and display different regions with different types of
-symbols and colors.
-
-\#I will use the function boxplot(), asking r to use data from my
-dataset ``data'' and to use ``X1'' as the X and Y as the Y.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{boxplot}\NormalTok{(Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X1, }\AttributeTok{data =}\NormalTok{ data,}
-        \AttributeTok{main =} \StringTok{"Per capita expenditure on housing assistance per X1"}\NormalTok{,}
-        \AttributeTok{xlab =} \StringTok{"X1"}\NormalTok{,}
-        \AttributeTok{ylab =} \StringTok{"Per capita expenditure on housing assistance"}\NormalTok{,}
-        \AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{PS1_answers_RLP_files/figure-latex/unnamed-chunk-20-1.pdf}}
-\#In general, we can see that the per capita expenditure on housing
-assistance increases as the value of X1 does. This is coherent with the
-correlation or r=0.53 that we have seen previously.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(ggplot2)}
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{X1, }\AttributeTok{y=}\NormalTok{Y, }\AttributeTok{color=}\FunctionTok{as.factor}\NormalTok{(Region), }\AttributeTok{shape=}
-                          \FunctionTok{as.factor}\NormalTok{(Region)))}\SpecialCharTok{+}\FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size=}\DecValTok{4}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Correlation between oer capita expenditure on housing assistance and X1 per Region"}\NormalTok{,}
-       \AttributeTok{x =} \StringTok{"X1"}\NormalTok{,}
-       \AttributeTok{y =} \StringTok{"Per capita expenditure on housing assistance"}\NormalTok{,}
-       \AttributeTok{color =} \StringTok{"Region"}\NormalTok{,}
-       \AttributeTok{shape =} \StringTok{"Region"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{PS1_answers_RLP_files/figure-latex/unnamed-chunk-21-1.pdf}}
-
-\#We can now see that there are important regional differences. The
-graphic shows, as we have previously seen, that the per capita
-expenditure on housing assistance is, indeed, highest in Region 4 and
-lowest in Region 3. Also, Regions 3 and 4 seem to be quite homogeneous
-in both dimensions (variables X1 and Y).
 
 \end{document}
