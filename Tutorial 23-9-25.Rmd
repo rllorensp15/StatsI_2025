@@ -1,0 +1,73 @@
+---
+title: "Tutorial 1"
+author: "Rubèn Llorens Poblador"
+date: "2025-09-23"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#load data
+```{r}
+df <- read.csv("datasets/fictional_data.csv")
+
+```
+
+#we're gonna view the data
+#View always goes with a capital V
+```{r}
+View(df)
+```
+
+#we wanna look at the distribution of income
+#to do so we type "hist" of df (the dataset) + $ + variable "income"
+```{r}
+hist(df$income)
+mean(df$income)
+var(df$income)
+sd(df$income)
+```
+
+#let's try education now
+
+```{r}
+hist(df$edu)
+mean(df$edu)
+var(df$edu)
+sd(df$edu)
+```
+
+#and now we're gonna find confidence intervals for income and education
+```{r}
+upper_95 = (mean(df$income))
+```
+
+#now let's plot a lil bit
+
+```{r}
+plot(df$income,df$edu)
+```
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

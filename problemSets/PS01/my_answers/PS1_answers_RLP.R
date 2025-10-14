@@ -27,7 +27,7 @@ pkgTest <- function(pkg){
 # ex: stringr
 # lapply(c("stringr"),  pkgTest)
 
-lapply(c(),  pkgTest)
+lapply(c("ggplot2"),  pkgTest)
 
 #####################
 # Problem 1
@@ -127,9 +127,9 @@ data_sel <- expenditure[c("Y","X1","X2","X3")]
 
 #And now I can plot the relationship amongst them:
 
-pdf("pdf1.pdf")
+png("plot1.png")
 plot(data_sel)
-
+dev.off()
 
 #Now, it's time to calculate the correlations between these variables (using the function cor():
 
@@ -151,12 +151,13 @@ table_correlation
 
 #I will use the function boxplot(), asking r to use data from my dataset
 #"expenditure" and to use "Region" as the X and Y as the Y.
-
+png("boxplot2.png")
 boxplot(Y ~ Region, data = expenditure,
         main = "Per capita expenditure on housing assistance per Region",
         xlab = "Region",
         ylab = "Per capita expenditure on housing assistance",
         col = "red")
+dev.off()
 
 #According to the graph, region 4 has the highest per capita expenditure
 #on housing assistance.
@@ -175,13 +176,13 @@ mean_by_region
 
 #I will use the function boxplot(), asking r to use data from my dataset "data" and to use "X1" as the X and Y as the Y.
 
-pdf("pdf2.pdf")
+png("boxplot3.png")
 boxplot(Y ~ X1, data = expenditure,
         main = "Per capita expenditure on housing assistance per X1",
         xlab = "X1",
         ylab = "Per capita expenditure on housing assistance",
         col = "green")
-
+dev.off()
 #In general, we can see that the per capita expenditure on housing
 #assistance increases as the value of X1 does. This is coherent with
 #the correlation or r=0.53 that we have seen previously.
