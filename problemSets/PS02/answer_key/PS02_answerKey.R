@@ -60,7 +60,7 @@ byHandChiSquare <- function(table){
   dimnames(expectedValues) <- dimnames(observedValues)
   # create function that calculates each cell residual variance
   # essentially formula on p. 225 in Agresti and Finlay(2009)
-  test_statistic <- sum((abs(table - expectedValues))^2 / expectedValues)
+  test_statistic <- sum((table - expectedValues)^2 / expectedValues)
   df <- (nrow(observedValues) - 1L) * (ncol(observedValues) - 1L)
   p_value <- pchisq(test_statistic, df, lower.tail = FALSE)
   adjusted_residuals <- (observedValues - expectedValues)/sqrt(expectedValues * (1-sumRow/grandSum) * (1-sumCol/grandSum))
