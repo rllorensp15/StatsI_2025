@@ -35,14 +35,14 @@ lapply(c("readr", "ggplot2", "dplyr", "viridis"),  pkgTest)
 # Get working directory
 getwd()
 
-# Set working directory"
-setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I")
+# Set wd for current folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # -------------------------------#
 # 2. Load & Inspect Data
 # -------------------------------#
 
-df <- read_csv("fictional_data.csv")
+df <- read_csv("../../datasets/fictional_data.csv")
 
 # Quick overview
 head(df)

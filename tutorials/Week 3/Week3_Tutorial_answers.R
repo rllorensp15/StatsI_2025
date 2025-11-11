@@ -35,9 +35,8 @@ lapply(c("readr", "ggplot2", "dplyr", "viridis", "foreign", "haven"),  pkgTest)
 # Get working directory
 getwd()
 
-# Set working directory"
-setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I/Week 3")
-
+# Set wd for current folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Agenda
 # (a.) Descriptive analysis
@@ -52,7 +51,7 @@ setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I/Week 3")
 # 2. Load & Inspect Data
 # -------------------------------#
 
-df <- read_csv("fictional_data.csv")
+df <- read_csv("../../datasets/fictional_data.csv")
 
 # Quick overview
 head(df)
@@ -383,7 +382,7 @@ t.test(df$income ~ df$cap, alternative = "less")
 # Why not load("polity.dta")?
 # - load() is for .RData/.rda (R’s serialized objects), not Stata files.
 # - Use haven::read_dta() for .dta files.
-data <- read.dta("polity.dta")
+data <- read.dta("../../datasets/polity.dta")
 
 # Quick look
 head(data)

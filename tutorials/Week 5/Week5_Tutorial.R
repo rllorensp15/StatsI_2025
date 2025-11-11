@@ -35,8 +35,8 @@ lapply(c("readr", "ggplot2"),  pkgTest)
 # Get working directory
 getwd()
 
-# Set working directory
-setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I/Week 5")
+# Set wd for current folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Agenda
 # (a.) Revise chi-square test
@@ -47,7 +47,7 @@ setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I/Week 5")
 # movie genre and rating?
 
 # Load data
-df <- readRDS("datasets/movies.rds")
+df <- readRDS("../../datasets/movies.csv")
 View(df)
 
 # Dataframe subsetting: df[rows, columns]
@@ -95,7 +95,7 @@ chi_test$stdres
 # b. Correlation
 # -------------------------------#
 
-df <- read.csv("datasets/fictional_data.csv")
+df <- read.csv("../../datasets/fictional_data.csv")
 View(df)
 
 # Scatter plot 

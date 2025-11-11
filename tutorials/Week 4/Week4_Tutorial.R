@@ -35,8 +35,8 @@ lapply(c("readr", "ggplot2", "dplyr", "viridis", "foreign"),  pkgTest)
 # Get working directory
 getwd()
 
-# Set working directory
-#setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I/Week 4")
+# Set wd for current folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Agenda
 # (0.0) Data-wrangling 
@@ -50,7 +50,7 @@ getwd()
 # -------------------------------#
 
 # Load data 
-df_not_tidy <- read.csv("data/movies.csv")
+df_not_tidy <- read.csv("../../datasets/movies.csv")
 
 # First step, look at data
 View(df_not_tidy)
@@ -63,7 +63,7 @@ summary(df_not_tidy)
 
 # Load the tidy version of thedata
 # (Prepared using the data_wrangling.R script)
-df <- readRDS("data/movies.rds")
+df <- readRDS("../../datasets/movies.rds")
 str(df)
 
 # First step, look at data
@@ -264,7 +264,7 @@ chi$residuals
 # Question: Is there an association between education and income?
 
 # Load dataset
-df <- read.csv("data/fictional_data.csv")
+df <- read.csv("../../datasets/fictional_data.csv")
 
 # Quick scatter plot
 plot(df$edu, df$income)

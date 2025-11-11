@@ -35,8 +35,8 @@ lapply(c("wbstats", "ggplot2", "tidyverse", "stargazer", "readr"),  pkgTest)
 # Get working directory
 getwd()
 
-# Set working directory
-setwd("/Users/elkarag/Desktop/Teaching/Applied Stats I/Week 8")
+# Set wd for current folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Agenda 
 # (a.) Gathering data
@@ -99,7 +99,7 @@ names(df)[8] <- "democracy"
 View(df)
 
 # Save the new dataframe
-write.csv(df, "df_income_mortality.csv")
+write.csv(df, "../../datasets/df_income_mortality.csv")
 
 # Exercise A -----------------
 # Add another variable either from the World Bank data or 

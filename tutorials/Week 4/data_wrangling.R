@@ -30,8 +30,11 @@ pkgTest <- function(pkg){
 # Load any necessary packages
 lapply(c("tidyverse", "lubridate"),  pkgTest)
 
+# Set wd for current folder
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
 # Import movies.csv
-df <- read.csv("data/movies.csv") 
+df <- read.csv("../../datasets/movies.csv") 
 
 ### Content 
 # (a.) Convert character variables into factor variables
@@ -110,4 +113,4 @@ df <- df[, !names(df)  %in% c("thtr_rel_year",
                               "dvd_rel_day")]
 
 # Save tidy version of df
-saveRDS(df, "data/movies.rds")
+saveRDS(df, "../../datasets/movies.rds")
