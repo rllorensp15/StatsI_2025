@@ -29,6 +29,9 @@ pkgTest <- function(pkg){
 
 # set wd for current folder
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("~/GitHub/StatsI_2025/problemSets/PS03/my_answers")
+
+getwd
 
 # read in data
 inc.sub <- read.csv("https://raw.githubusercontent.com/ASDS-TCD/StatsI_2025/main/datasets/incumbents_subset.csv")
@@ -40,6 +43,10 @@ View(inc.sub)
 model_q1 <- lm(voteshare ~ difflog, data = inc.sub)
 summary(model_q1)
 
+stargazer(model_q1)
+
+modelsummary(model_q1, output = "latex", title = "OLS Results 1 PS03")
+
 #To create this scatterplot of the two variables, I will load the system
 #"ggplot2", which is know for having good visuals.
 
@@ -49,15 +56,17 @@ library(stargazer)
 #Then, I will create the scatterplot using, again, "difflog" as the explanatory
 #variable, and "voteshare" as the outcome variable.
 
-ggplot(inc.sub, aes(x = difflog, y = voteshare)) +
+ggplot1 <- ggplot(inc.sub, aes(x = difflog, y = voteshare)) +
   geom_point(colour = "darkgrey") +
   geom_smooth(method = "lm", colour = "blue", se = FALSE) +
   labs(
-    title = "Vote share of the presidential candidate of the incumbents party by Campaign spending",
-    x = "Campaign Spending",
+    title = "Vote share of the presidential candidate of the incumbents party by Difference in Campaign Spending between the Incumbent and the Challenge",
+    x = "Difference in Campaign Spending between the Incumbent and the Challenger",
     y = "Incumbent's Vote Share"
   ) +
   theme_minimal()
+
+ggsave("scatterplot1_PS03.png", plot = ggplot1, width = 9, height = 7, dpi = 300)
 
 #I will create a new object using the function "residuals()" and I will name it
 #"residuals_model_q1)
@@ -78,7 +87,9 @@ residuals_model_q1
 model_q2 <- lm(presvote ~ difflog, data = inc.sub)
 summary(model_q2)
 
-ggplot(inc.sub, aes(x = difflog, y = presvote)) +
+stargazer(model_q2)
+
+ggplot2 <- ggplot(inc.sub, aes(x = difflog, y = presvote)) +
   geom_point(colour = "darkgrey") +
   geom_smooth(method = "lm", colour = "blue", se = FALSE) +
   labs(
@@ -87,6 +98,8 @@ ggplot(inc.sub, aes(x = difflog, y = presvote)) +
     y = "Vote share of the presidential candidate of the incumbents party"
   ) +
   theme_minimal()
+ggsave("scatterplot2_PS03.png", plot = ggplot2, width = 8, height = 6, dpi = 300)
+
 
 residuals_model_q2 <- residuals(model_q2)
 mean(residuals_model_q2)
@@ -108,7 +121,9 @@ residuals_model_q2
 model_q3 <- lm(voteshare ~ presvote, data = inc.sub)
 summary(model_q3)
 
-ggplot(inc.sub, aes(x = presvote, y = voteshare)) +
+stargazer(model_q3)
+
+ggplot3 <- ggplot(inc.sub, aes(x = presvote, y = voteshare)) +
   geom_point(colour = "darkgrey") +
   geom_smooth(method = "lm", colour = "blue", se = FALSE) +
   labs(
@@ -117,6 +132,8 @@ ggplot(inc.sub, aes(x = presvote, y = voteshare)) +
     y = "Incumbents electoral success"
   ) +
   theme_minimal()
+ggsave("scatterplot3_PS03.png", plot = ggplot3, width = 8, height = 6, dpi = 300)
+
 
 residuals_model_q3 <- residuals(model_q3)
 mean(residuals_model_q3)
@@ -142,8 +159,9 @@ residuals_model_q3
 
 model_residuals <- lm(residuals_model_q1 ~ residuals_model_q2, data = inc.sub)
 summary(model_residuals)
+stargazer(model_residuals)
 
-ggplot(inc.sub, aes(x = residuals_model_q2, y = residuals_model_q1)) +
+ggplot4 <- ggplot(inc.sub, aes(x = residuals_model_q2, y = residuals_model_q1)) +
   geom_point(colour = "darkgrey") +
   geom_smooth(method = "lm", colour = "blue", se = FALSE) +
   labs(
@@ -152,6 +170,8 @@ ggplot(inc.sub, aes(x = residuals_model_q2, y = residuals_model_q1)) +
     y = "Residuals Question 1"
   ) +
   theme_minimal()
+ggsave("scatterplot4_PS03.png", plot = ggplot4, width = 8, height = 6, dpi = 300)
+
 
 #Prediction equation:
 #The general formula is Y = a + bX
@@ -170,6 +190,7 @@ ggplot(inc.sub, aes(x = residuals_model_q2, y = residuals_model_q1)) +
 
 model_q5 <- lm(voteshare ~ difflog + presvote, data = inc.sub)
 summary(model_q5)
+stargazer(model_q5)
 
 #Prediction equation:
 #The general formula is Y = a + bX
